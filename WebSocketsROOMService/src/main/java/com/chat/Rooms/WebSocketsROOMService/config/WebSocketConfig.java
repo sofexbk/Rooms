@@ -15,7 +15,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSocketMessageBroker
-/*fgd */
+/*fgd wxc*/
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
