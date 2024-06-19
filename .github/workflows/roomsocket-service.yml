@@ -1,4 +1,4 @@
-name: Room Service CI/CD
+name: RoomSocket Service CI/CD
 
 on:
   push:

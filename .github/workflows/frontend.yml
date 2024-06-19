@@ -25,11 +25,11 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        working-directory: ./frontend
+        working-directory: ./FrontEnd
         run: npm install
 
       - name: Run build
-        working-directory: ./frontend
+        working-directory: ./FrontEnd
         run: npm run build
 
       - name: Login to Docker registry
@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker image to registry
-        working-directory: ./frontend
+        working-directory: ./FrontEnd
         run: |
           docker build -t roomsproject/frontend:latest .
           docker push roomsproject/frontend:latest
