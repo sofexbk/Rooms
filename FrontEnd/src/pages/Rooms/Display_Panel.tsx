@@ -16,7 +16,7 @@ import {
 import { useAuth } from "@/Providers/AuthContext"
 import { useRooms } from "@/Providers/RoomsContext"
 import { useRoomSockets } from "@/Providers/Rooms_SocketsContext"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar } from "@/components/ui/avatar"
 import { BackgroundBeams } from "@/components/ui/background-beams"
 import { Button } from "@/components/ui/button"
 import {
@@ -34,7 +34,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { useToast } from "@/components/ui/use-toast"
-import translateMessage from "@/services/translateMessage"
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import axios from "axios"
 import { format, formatDistanceToNow, isToday } from "date-fns"
@@ -108,23 +107,23 @@ export function Display_Panel({ }: DashboardDisplayProps) {
 
   const { t } = useTranslation();
   const { toast } = useToast()
-  const { user, users, getUserName, getUserAvatar } = useAuth();
+  const { user, users } = useAuth();
   const { idRoom } = useParams();
-  const { roomsAndRoles, roomAdmin, getRoomAdmin, deleteRoom } = useRooms();
+  const { roomsAndRoles, roomAdmin,  deleteRoom } = useRooms();
   const [isEditRoomModelOpen, setIsEditRoomModelOpen] = useState(false);
   const oneRoom = roomsAndRoles?.find(item => item.roomId.toString() === idRoom) || null; //Security check hna kayen to verify if the room bemongs to user awla no
 
-  useEffect(() => {
+  /*useEffect(() => {
     getRoomAdmin(idRoom)
     subscribeToRoom(idRoom?.toString()); // hna where kan subscribe to the room once display message kayen
-  }, [oneRoom, idRoom]);
+  }, [oneRoom, idRoom]);*/
 
   const handleEditClick = () => {
     setIsEditRoomModelOpen(true);
   };
 
   // ROOM MESSAGE
-  const { subscribeToRoom } = useRoomSockets();
+  //const { subscribeToRoom } = useRoomSockets();
   const { sendMessage, IncomingMessage: IncomingMessage } = useRoomSockets();
   const [content, setContent] = useState<string>('');
   const [roomMessages, setRoomMessages] = useState<RoomMessage[]>([]);
@@ -156,12 +155,12 @@ export function Display_Panel({ }: DashboardDisplayProps) {
   };
 
   // Message Translator
-  const [from, setFrom] = useState('en');
+ /* const [from, setFrom] = useState('en');
   const [to, setTo] = useState('fr');
 
   const handleTranslate = async (inputText: string): Promise<void> => {
     const translatedText = await translateMessage(inputText, from, to);
-  };
+  };*/
 
   useEffect(() => {
     const fetchData = async () => {
@@ -298,12 +297,8 @@ export function Display_Panel({ }: DashboardDisplayProps) {
                     >
                       <div className="flex gap-5 items-start w-full">
                         <Avatar className="flex justify-center items-center h-6 w-6">
-                          <AvatarImage
-                            src={sender?.avatarUrl}
-                          />
-                          <AvatarFallback className="bg-primary-foreground text-secondary-foreground capitalize font-bold" >
-                            {(sender?.firstName[0] + sender?.lastName[0])}
-                          </AvatarFallback>
+
+ 
                         </Avatar>
 
                         <TooltipProvider>

@@ -9,7 +9,6 @@ import { Badge } from "../../components/ui/badge"
 import { Input } from "../../components/ui/input"
 import { ScrollArea } from "../../components/ui/scroll-area"
 import { Separator } from "../../components/ui/separator"
-import { Progress } from "@/components/ui/progress"
 import {
   Tabs,
   TabsContent,
@@ -21,27 +20,23 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useRoomSockets } from "@/Providers/Rooms_SocketsContext"
 import { useTranslation } from "react-i18next"
 
-import { LeafPoll, Result } from 'react-leaf-polls'
+import {  Result } from 'react-leaf-polls'
 import 'react-leaf-polls/dist/index.css'
 
 // Persistent data array (typically fetched from the server)
-const resData = [
+/*const resData = [
   { text: 'Answer 1', votes: 0 },
   { text: 'Answer 2', votes: 0 },
   { text: 'Answer 3', votes: 0 }
-]
+]*/
 
 // Object keys may vary on the poll type (see the 'Theme options' table below)
-const customTheme = {
+/*const customTheme = {
   textColor: 'black',
   mainColor: '#00B87B',
   backgroundColor: 'rgb(255,255,255)',
   alignment: 'center'
-}
-function vote(item: Result, results: Result[]) {
-  // Here you probably want to manage
-  // and return the modified data to the server.
-}
+}*/
 
 
 
