@@ -12,7 +12,7 @@ namespace RoomService.Data
         public RoomContext(DbContextOptions<RoomContext> options) : base(options)
         {
         }
-
+/*TEST POUR CI CD*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<RoomUser>()
