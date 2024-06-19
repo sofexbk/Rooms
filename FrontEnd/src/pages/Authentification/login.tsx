@@ -5,7 +5,7 @@ import { Metadata } from "next"
 import Link from "next/link"
 import ParticleRing from './ParticleRing'
 import { useTranslation } from "react-i18next"
-
+/*88*/
 export const metadata: Metadata = {
   title: "Authentication",
   description: "Authentication forms built using the components.",
