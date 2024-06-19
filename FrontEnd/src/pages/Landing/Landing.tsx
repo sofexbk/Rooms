@@ -3,7 +3,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import AuroraHero from "./Compos/AuroraHero"
 import ShuffleHero from "./Compos/ShuffleHero"
 import { GlobeDemo } from "./Compos/GlobeDemo"
-import { LanguageChanger } from "@/components/shared/LanguageChanger"
+//import { LanguageChanger } from "@/components/shared/LanguageChanger"
 
 
 interface LandingProps {

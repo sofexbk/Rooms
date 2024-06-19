@@ -4,9 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
+//import { Button } from "@/components/ui/button"
 import {
-  Form,
+  //Form,
   FormControl,
   FormDescription,
   FormField,
@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { toast } from "@/components/ui/use-toast"
+//import { toast } from "@/components/ui/use-toast"
 
 const FormSchema = z.object({
   username: z.string().min(2, {
@@ -31,7 +31,7 @@ export function InputForm() {
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  /*function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
       title: "You submitted the following values:",
       description: (
@@ -40,7 +40,7 @@ export function InputForm() {
         </pre>
       ),
     })
-  }
+  }*/
 
   return (
         <FormField

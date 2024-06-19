@@ -160,7 +160,13 @@ export const RoomsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       const response: AxiosResponse = await axiosInstance.delete('/unlinkuser', {
         data: requestUnlink
       });
-      getRoomUsers(requestUnlink.roomId) //refresh room users
+  
+      // Example: Check status code or use response.data if needed
+      console.log('Status:', response.status);
+      console.log('Response data:', response.data);
+  
+      // Refresh room users after successful unlinking
+      getRoomUsers(requestUnlink.roomId);
     } catch (error) {
       console.error('Error unlinking user:', error);
       throw error;

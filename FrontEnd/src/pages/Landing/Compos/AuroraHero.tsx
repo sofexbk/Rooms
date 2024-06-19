@@ -9,10 +9,10 @@ import {
 } from "framer-motion";
 import { useEffect } from "react";
 import { FiArrowRight } from "react-icons/fi";
-import { GlobeDemo } from "./GlobeDemo";
+//import { GlobeDemo } from "./GlobeDemo";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LanguageChanger } from "@/components/shared/LanguageChanger";
+//import { LanguageChanger } from "@/components/shared/LanguageChanger";
 
 const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 

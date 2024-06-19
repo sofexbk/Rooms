@@ -3,13 +3,13 @@ import { useAuth } from '@/Providers/AuthContext'
 import { Sidebar } from "@/components/shared/sidebar"
 import { Input } from "@/components/ui/input"
 import * as React from "react"
-import { Toaster } from "sonner"
+//import { Toaster } from "sonner"
 import { ResizablePanel, ResizablePanelGroup } from "../../components/ui/resizable"
 import { TooltipProvider } from "../../components/ui/tooltip"
 
 import { Button } from '@/components/ui/button'
 import { Label } from "@/components/ui/label"
-import { useLocation } from "react-router-dom"
+//import { useLocation } from "react-router-dom"
 
 
 
@@ -25,7 +25,7 @@ export default function Profile({
   navCollapsedSize,
 }: ProfileProps) {
   const { user } = useAuth();
-  type UserData = {
+  /*type UserData = {
     id: number;
     firstName: string;
     lastName: string;
@@ -36,7 +36,7 @@ export default function Profile({
     avatarUrl: string;
     isGithub: boolean;
     isGoogle: boolean;
-  };
+  };*/
   console.log(user)
   return (
     <>

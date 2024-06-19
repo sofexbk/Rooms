@@ -5,7 +5,7 @@ interface RedirectPageGoogleProps { }
 
 const RedirectPageGoogle: React.FC<RedirectPageGoogleProps> = () => {
   const { login } = useAuth();
-  const [usergoogleData, setUsergoogleData] = useState<any>(null); // State to store the user googleData
+  const [_, setUsergoogleData] = useState<any>(null); // State to store the user googleData
   const navigate = useNavigate();
 
   const fetchUsergoogleData = async () => {

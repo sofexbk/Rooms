@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Check, Plus, Send } from "lucide-react"
+import { Check, Plus} from "lucide-react"
 import {
     Avatar,
     AvatarFallback,
@@ -55,7 +55,7 @@ export function InviteMember() {
     const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
     const { inviteUser, getRoomUsers } = useRooms();
     const [input, setInput] = React.useState("")
-    const inputLength = input.trim().length;
+   // const inputLength = input.trim().length;
 
     const handleSelect = (clickedUser: User) => {
         const isSelected = selectedUsers.some(user => user.id === clickedUser.id);

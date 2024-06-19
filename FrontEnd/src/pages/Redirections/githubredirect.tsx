@@ -6,7 +6,7 @@ interface RedirectPageGithub { }
 
 const RedirectPageGithub: React.FC<RedirectPageGithub> = () => {
   const { login } = useAuth();
-  const [usergithubData, setUsergithubData] = useState<any>(null); // State to store the user githubData
+  const [_, setUsergithubData] = useState<any>(null); // State to store the user githubData
   const navigate = useNavigate();
 
   const fetchUsergithubData = async () => {

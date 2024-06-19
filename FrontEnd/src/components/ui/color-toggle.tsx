@@ -1,5 +1,5 @@
 import { Moon, Sun } from "lucide-react"
-type Theme = "slateLight" | "blueLight" | "orangeLight" | "yellowLight" | "redLight"| "greenLight" | "violetLight" | "slateDark"| "blueDark" | "orangeDark"| "violetDark" | "yellowDark"| "redDark" | "greenDark"
+//type Theme = "slateLight" | "blueLight" | "orangeLight" | "yellowLight" | "redLight"| "greenLight" | "violetLight" | "slateDark"| "blueDark" | "orangeDark"| "violetDark" | "yellowDark"| "redDark" | "greenDark"
 
 import { Button } from "@/components/ui/button"
 import {

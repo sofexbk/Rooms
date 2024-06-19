@@ -43,16 +43,18 @@ export const DM_SocketsProvider: React.FC<{ children: ReactNode }> = ({ children
                 console.log('Connected to WebSocket');
                 setStompClient(stompclient);
                 console.log('Stomp Client Setted');
-
             });
+    
             return () => {
                 if (stompClient && stompClient.connected) {
-                    stompclient.disconnect();
-                    console.log('Disconnected from WebSocket');
+                    stompclient.disconnect(() => {
+                        console.log('Disconnected from WebSocket');
+                    });
                 }
             };
         }
     }, [token, user]);
+    
     
     // Subscribe to incoming messages
     useEffect(() => {
