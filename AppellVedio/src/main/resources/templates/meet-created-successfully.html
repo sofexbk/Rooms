@@ -1,0 +1,152 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Join Meeting</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Join Meeting</h1>-->
+<!--<p>User: <span id="username"></span></p>-->
+<!--<p>Meeting Date and Time: <span id="meetingDateTime"></span></p>-->
+<!--&lt;!&ndash; Ajoutez d'autres éléments HTML pour permettre aux utilisateurs de rejoindre la réunion &ndash;&gt;-->
+
+<!--&lt;!&ndash; Formulaire pour rejoindre la réunion &ndash;&gt;-->
+<!--<form id="joinMeetForm" action="/join-meetD" method="GET">-->
+<!--  &lt;!&ndash; Champ caché pour le nom d'utilisateur &ndash;&gt;-->
+<!--  <input type="hidden" id="usernameInput" name="username" value="">-->
+<!--  &lt;!&ndash; Champ caché pour la date et l'heure de la réunion &ndash;&gt;-->
+<!--  <input type="hidden" id="meetingDateTimeInput" name="meetingDateTime" value="">-->
+<!--  &lt;!&ndash; Bouton pour rejoindre la réunion &ndash;&gt;-->
+<!--  <button type="submit" id="joinMeetingButton">Join Meeting</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--<script>-->
+<!--  // Récupérer les paramètres de l'URL-->
+<!--  const params = new URLSearchParams(window.location.search);-->
+<!--  const username = params.get('username');-->
+<!--  const meetingDateTime = new Date(params.get('meetingDateTime'));-->
+
+<!--  // Mettre à jour les éléments HTML avec les valeurs des paramètres-->
+<!--  document.getElementById('username').innerText = username;-->
+<!--  document.getElementById('meetingDateTime').innerText = meetingDateTime;-->
+
+<!--  // Mettre à jour les champs cachés du formulaire avec les valeurs des paramètres-->
+<!--  document.getElementById('usernameInput').value = username;-->
+<!--  document.getElementById('meetingDateTimeInput').value = meetingDateTime;-->
+
+<!--  // Vérifier si la date de la réunion n'est pas passée-->
+<!--  const currentDate = new Date();-->
+<!--  if (meetingDateTime < currentDate) {-->
+<!--    // Activer le bouton "Join Meeting" si la date n'est pas passée-->
+<!--    document.getElementById('joinMeetingButton').disabled = false;-->
+<!--  } else {-->
+<!--    // Désactiver le bouton "Join Meeting" et afficher un message si la date est passée-->
+<!--    document.getElementById('joinMeetingButton').disabled = true;-->
+<!--    document.body.innerHTML += "<p> Vous ne pouvez pas rejoindre cette réunion maintenant.</p>";-->
+<!--  }-->
+<!--</script>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Meeting</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      max-width: 400px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      margin-top: 0;
+      color: #007bff;
+    }
+    form {
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+    input {
+      width: calc(100% - 20px);
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Join Meeting</h1>
+  <p>User: <span id="username"></span></p>
+  <p>Meeting Date and Time: <span id="meetingDateTime"></span></p>
+
+  <form id="joinMeetForm" action="/join-meetD" method="GET">
+    <input type="hidden" id="usernameInput" name="username" value="">
+    <input type="hidden" id="meetingDateTimeInput" name="meetingDateTime" value="">
+    <button type="submit" id="joinMeetingButton">Join Meeting</button>
+  </form>
+
+  <p class="error-message" id="errorMessage"></p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const username = params.get('username');
+  const meetingDateTime = new Date(params.get('meetingDateTime'));
+  const currentDate = new Date();
+
+  document.getElementById('username').innerText = username;
+  document.getElementById('meetingDateTime').innerText = meetingDateTime.toLocaleString();
+
+  document.getElementById('usernameInput').value = username;
+  document.getElementById('meetingDateTimeInput').value = meetingDateTime.toISOString();
+
+  if (meetingDateTime < currentDate) {
+    document.getElementById('joinMeetingButton').disabled = false;
+  } else {
+    document.getElementById('joinMeetingButton').disabled = true;
+    document.getElementById('errorMessage').innerText = "Vous ne pouvez pas rejoindre cette réunion maintenant.";
+  }
+</script>
+
+</body>
+</html>
+

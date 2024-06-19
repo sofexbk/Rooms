@@ -1,0 +1,334 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+
+<!--<head>-->
+<!--    <style>-->
+<!--        #root {-->
+<!--            width: 100vw;-->
+<!--            height: 100vh;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div id="root">-->
+<!--    <p id="welcomeMessage">Bienvenue, <span id="username"></span> !</p>-->
+<!--</div>-->
+
+<!--<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>-->
+<!--<script>-->
+<!--    window.onload = function () {-->
+<!--        function getUrlParams(url) {-->
+<!--            let urlStr = url.split('?')[1];-->
+<!--            const urlSearchParams = new URLSearchParams(urlStr);-->
+<!--            const result = Object.fromEntries(urlSearchParams.entries());-->
+<!--            return result;-->
+<!--        }-->
+
+<!--        // Récupérer le nom d'utilisateur passé en paramètre de l'URL-->
+<!--        const userName = getUrlParams(window.location.href)['username'] || "userName" + Math.floor(Math.random() * 10000);-->
+
+<!--        // Afficher le nom d'utilisateur dans le message de bienvenue-->
+<!--        document.getElementById("username").innerText = userName;-->
+
+<!--        // Générer le token Zego-->
+<!--        const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");-->
+<!--        const userID = Math.floor(Math.random() * 10000) + "";-->
+<!--        const appID = 780470905;-->
+<!--        const serverSecret = "9cb6863e3f02b2206989daa24c6026e6";-->
+<!--        const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);-->
+
+<!--        // Rejoindre la salle de réunion avec le nom d'utilisateur-->
+<!--        const zp = ZegoUIKitPrebuilt.create(kitToken);-->
+<!--        zp.joinRoom({-->
+<!--            container: document.querySelector("#root"),-->
+<!--            sharedLinks: [{-->
+<!--                name: 'Personal link',-->
+<!--                url: window.location.protocol + '//' + window.location.host + window.location.pathname + '?roomID=' + roomID,-->
+<!--            }],-->
+<!--            scenario: {-->
+<!--                mode: ZegoUIKitPrebuilt.VideoConference,-->
+<!--            },-->
+<!--            turnOnMicrophoneWhenJoining: true,-->
+<!--            turnOnCameraWhenJoining: true,-->
+<!--            showMyCameraToggleButton: true,-->
+<!--            showMyMicrophoneToggleButton: true,-->
+<!--            showAudioVideoSettingsButton: true,-->
+<!--            showScreenSharingButton: true,-->
+<!--            showTextChat: true,-->
+<!--            showUserList: true,-->
+<!--            maxUsers: 50,-->
+<!--            layout: "Auto",-->
+<!--            showLayoutButton: true,-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f0f0f0;-->
+<!--            margin: 0;-->
+<!--        }-->
+<!--        #info-container {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            height: 100vh;-->
+<!--        }-->
+<!--        #info-box {-->
+<!--            background: white;-->
+<!--            border-radius: 10px;-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--            padding: 20px;-->
+<!--            text-align: center;-->
+<!--            width: 300px;-->
+<!--        }-->
+<!--        .join-room {-->
+<!--            margin: 20px 0;-->
+<!--        }-->
+<!--        .join-room input {-->
+<!--            padding: 10px;-->
+<!--            width: calc(100% - 24px);-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+<!--        .join-room button {-->
+<!--            padding: 10px;-->
+<!--            width: 100%;-->
+<!--            background-color: #007bff;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+<!--        .join-room button:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+<!--        .share-link {-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+<!--        .share-link a {-->
+<!--            color: #007bff;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+<!--        .share-link a:hover {-->
+<!--            text-decoration: underline;-->
+<!--        }-->
+<!--        #meeting-container {-->
+<!--            display: none;-->
+<!--            height: 100vh;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="info-container">-->
+<!--    <div id="info-box">-->
+<!--        <p id="welcomeMessage">Bienvenue, <span id="username" th:text="${username}">Username</span>!</p>-->
+<!--        <p>ID de room : <b style="color: #007bff" id="roomID" th:text="${roomID}">RoomID</b></p>-->
+<!--        <div class="join-room">-->
+<!--            <label for="join-room-input">Cree le meet </label>-->
+<!--            <input type="text" id="join-room-input" th:value="${username}" readonly>-->
+<!--            <button id="join-room-button">Cree </button>-->
+<!--        </div>-->
+<!--        <div class="share-link">-->
+<!--            <label>Partager le lien</label>-->
+<!--            <p id="personal-link">Lien personnel : <a href="#" th:href="@{'/video-call?username=' + ${username} + '&roomID=' + ${roomID}}">Join Meeting</a></p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div id="meeting-container"></div>-->
+
+<!--<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>-->
+<!--<script>-->
+<!--    window.onload = function () {-->
+<!--        const username = document.getElementById("username").innerText;-->
+<!--        const roomID = document.getElementById("roomID").innerText;-->
+<!--        const personalLinkElement = document.getElementById("personal-link");-->
+
+<!--        // Generate the token Zego-->
+<!--        const userID = Math.floor(Math.random() * 10000) + "";-->
+<!--        const appID = 780470905;-->
+<!--        const serverSecret = "9cb6863e3f02b2206989daa24c6026e6";-->
+<!--        const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, username);-->
+
+<!--        // Update personal link-->
+<!--        const personalLink = `${window.location.protocol}//${window.location.host}/video-call?username=${username}&roomID=${roomID}`;-->
+<!--        personalLinkElement.querySelector('a').setAttribute('href', personalLink);-->
+<!--        personalLinkElement.querySelector('a').innerText = personalLink;-->
+
+<!--        // Join the meeting room with the username-->
+<!--        document.getElementById("join-room-button").onclick = function () {-->
+<!--            document.getElementById("info-container").style.display = "none";-->
+<!--            document.getElementById("meeting-container").style.display = "block";-->
+
+<!--            const zp = ZegoUIKitPrebuilt.create(kitToken);-->
+<!--            zp.joinRoom({-->
+<!--                container: document.querySelector("#meeting-container"),-->
+<!--                sharedLinks: [{-->
+<!--                    name: 'Lien personnel',-->
+<!--                    url: personalLink,-->
+<!--                }],-->
+<!--                scenario: {-->
+<!--                    mode: ZegoUIKitPrebuilt.VideoConference,-->
+<!--                },-->
+<!--                turnOnMicrophoneWhenJoining: true,-->
+<!--                turnOnCameraWhenJoining: true,-->
+<!--                showMyCameraToggleButton: true,-->
+<!--                showMyMicrophoneToggleButton: true,-->
+<!--                showAudioVideoSettingsButton: true,-->
+<!--                showScreenSharingButton: true,-->
+<!--                showTextChat: true,-->
+<!--                showUserList: true,-->
+<!--                maxUsers: 50,-->
+<!--                layout: "Auto",-->
+<!--                showLayoutButton: true,-->
+<!--            });-->
+<!--        };-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        #info-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #info-box {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+        }
+        .join-room {
+            margin: 20px 0;
+        }
+        .join-room input {
+            padding: 10px;
+            width: calc(100% - 24px);
+            margin-bottom: 10px;
+        }
+        .join-room button {
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .join-room button:hover {
+            background-color: #0056b3;
+        }
+        .share-link {
+            margin-top: 20px;
+        }
+        .share-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .share-link a:hover {
+            text-decoration: underline;
+        }
+        #meeting-container {
+            display: none;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div id="info-container">
+    <div id="info-box">
+        <p id="welcomeMessage">Bienvenue, <span id="username" th:text="${username}">Username</span>!</p>
+        <p>ID de room : <b style="color: #007bff" id="roomID" th:text="${roomID}">RoomID</b></p>
+        <div class="join-room">
+            <label for="join-room-input">Cree le meet </label>
+            <input type="text" id="join-room-input" th:value="${username}" readonly>
+            <button id="join-room-button">Cree </button>
+        </div>
+        <div class="share-link">
+            <label>Partager le lien</label>
+            <p id="personal-link">Lien personnel : <a href="#" th:href="@{'/video-call?username=' + ${username} + '&roomID=' + ${roomID}}">Join Meeting</a></p>
+        </div>
+    </div>
+</div>
+<div id="meeting-container"></div>
+
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+<script>
+    window.onload = function () {
+        const username = document.getElementById("username").innerText;
+        const roomID = document.getElementById("roomID").innerText;
+        const personalLinkElement = document.getElementById("personal-link");
+
+        // Generate the token Zego
+        const userID = Math.floor(Math.random() * 10000) + "";
+        const appID = 780470905;
+        const serverSecret = "9cb6863e3f02b2206989daa24c6026e6";
+        const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, username);
+
+        // Update personal link
+        const personalLink = `${window.location.protocol}//${window.location.host}/video-call?username=${username}&roomID=${roomID}`;
+        personalLinkElement.querySelector('a').setAttribute('href', personalLink);
+        personalLinkElement.querySelector('a').innerText = personalLink;
+
+        // Join the meeting room with the username
+        document.getElementById("join-room-button").onclick = function () {
+            document.getElementById("info-container").style.display = "none";
+            document.getElementById("meeting-container").style.display = "block";
+
+            const zp = ZegoUIKitPrebuilt.create(kitToken);
+            zp.joinRoom({
+                container: document.querySelector("#meeting-container"),
+                sharedLinks: [{
+                    name: 'Lien personnel',
+                    url: personalLink,
+                }],
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.VideoConference,
+                },
+                turnOnMicrophoneWhenJoining: true,
+                turnOnCameraWhenJoining: true,
+                showMyCameraToggleButton: true,
+                showMyMicrophoneToggleButton: true,
+                showAudioVideoSettingsButton: true,
+                showScreenSharingButton: true,
+                showTextChat: true,
+                showUserList: true,
+                maxUsers: 50,
+                layout: "Auto",
+                showLayoutButton: true,
+            });
+        };
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

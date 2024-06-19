@@ -1,0 +1,62 @@
+version: "3.9"
+services:
+
+  frontend:
+    image: frontend
+    container_name: frontend
+    ports:
+      - "5173:5173"
+
+  web_api:
+    image: auth-service
+    container_name: auth-service
+    ports:
+      - "5000:8080"
+  
+  sql1:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sql_server2022
+    ports: 
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=A&VeryComplex123Password
+    volumes:
+      - sql-data:/var/opt/mssql
+
+  service_room:
+    image: service-room
+    container_name: service-room
+    ports:
+      - "5001:8080"
+
+  service_dm:
+    image: service-dm
+    container_name: service-dm
+    ports:
+      - "8080:8080"
+
+  video_call:
+    image: videocall-service
+    container_name: videocall-service
+    ports:
+      - "8082:8081"
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  sql-data:
+  mongo-data:
+# mongo2:
+#   image: mongo
+#   container_name: mongo2
+#   ports:
+#     - "27018:27017"
+#   volumes:
+#     - ./mongo2-data:/data/db
