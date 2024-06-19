@@ -4,8 +4,8 @@ import { Nav } from "@/components/ui/nav";
 import { ResizableHandle, ResizablePanel } from "@/components/ui/resizable";
 import * as Icon from "lucide-react";
 import * as React from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from 'react-router-dom';
+//import { useTranslation } from "react-i18next";
+//import { useNavigate } from 'react-router-dom';
 
 interface sidebarProps {
   defaultLayout: number[];

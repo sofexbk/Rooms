@@ -87,11 +87,14 @@ export const RoomsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [roomsAndRoles, setRoomsAndRoles] = useState<RoomRole[]>();
   const [usersAndRoles, setusersAndRoles] = useState<UserRole[]>();
   const [roomAdmin, setRoomAdmin] = useState<number>();
-  const [room, setRoom] = useState<Room>();
+ // const [room, setRoom] = useState<Room>();
   
   // Get ROOMS of 1 User
   const getUserRooms = async (userId: number) => {
     try {
+      if (!user) {
+        throw new Error('User is not authenticated.'); // Handle this case according to your application logic
+      }
       const response = await axiosInstance.get(`/getRooms?userId=${userId}`);
       const roomsAndRolesData = response.data as RoomRole[];
       setRoomsAndRoles(roomsAndRolesData);
@@ -128,13 +131,17 @@ export const RoomsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   // Add new ROOM
   const addRoom = async (requestAddRoom: RoomCreateDto) => {
     try {
-      await axiosInstance.post('/addroom', requestAddRoom)
-      getUserRooms(user.id);
+      if (!user) {
+        throw new Error('User is not authenticated.'); // Handle this case according to your application logic
+      }
+      await axiosInstance.post('/addroom', requestAddRoom);
+      await getUserRooms(user.id); // Ensure to await the getUserRooms call if needed
     } catch (error) {
-      console.error('Error adding new room :', error);
+      console.error('Error adding new room:', error);
       throw error;
     }
   };
+  
 
   // Invite 1 USER
   const inviteUser = async (requestInvitation: InviteUserDto) => {
@@ -174,6 +181,9 @@ export const RoomsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   // Delete 1 ROOM
   const deleteRoom = async (roomId: number): Promise<void> => {
     try {
+      if (!user) {
+        throw new Error('User is not authenticated.'); // Handle this case according to your application logic
+      }
       await axiosInstance.delete(`/deleteroom?roomId=${roomId}`);
       getUserRooms(user.id);
     } catch (error) {
@@ -181,6 +191,7 @@ export const RoomsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       throw error;
     }
   };
+
 
   return (
     <RoomsContext.Provider value={{ roomsAndRoles, usersAndRoles, roomAdmin, getUserRooms, getRoomUsers, getRoomAdmin, addRoom, inviteUser, unlinkUser, deleteRoom, updateRoom }}>

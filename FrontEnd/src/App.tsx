@@ -20,7 +20,7 @@ import SettingsProfilePage from './pages/Settings/forms/profile/page';
 import Test from './pages/Test/test';
 import { RoomsProvider } from './Providers/RoomsContext';
 import { Rooms_SocketsProvider } from './Providers/Rooms_SocketsContext';
-import { LanguageChanger } from './components/shared/LanguageChanger';
+//import { LanguageChanger } from './components/shared/LanguageChanger';
 
 
 const router = createBrowserRouter(
@@ -35,7 +35,7 @@ const router = createBrowserRouter(
         <Route path="/direct/:idContact" element={<DM />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile defaultLayout={undefined} navCollapsedSize={0} children={undefined} />} />
         <Route path="/githubredirect" element={<RedirectPageGithub />} />
         <Route path="/googleredirect" element={<RedirectPageGoogle />} />
         <Route path="test" element={<Test />} />
