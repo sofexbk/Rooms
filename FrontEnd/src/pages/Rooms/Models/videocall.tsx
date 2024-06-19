@@ -1,32 +1,20 @@
 import * as React from "react";
-import { Check, Plus, Send, Video } from "lucide-react";
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-} from "@/components/ui/avatar";
+import { Video } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-} from "@/components/ui/command";
+
 import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTranslation } from "react-i18next";
 
-const users = [
+/*const users = [
     {
         name: "Olivia Martin",
         email: "m@example.com",
@@ -53,15 +41,15 @@ const users = [
         avatar: "/avatars/04.png",
     },
 ];
-
-type User = typeof users[number];
+*/
+//type User = typeof users[number];
 
 export function VideoCall() {
     const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
-    const [selectedUsers, setSelectedUsers] = React.useState<User[]>([]);
-    const [input, setInput] = React.useState("");
-    const inputLength = input.trim().length;
+   // const [selectedUsers, setSelectedUsers] = React.useState<User[]>([]);
+   // const [input, setInput] = React.useState("");
+   // const inputLength = input.trim().length;
 
     const handleRoomMeetClick = () => {
         window.location.href = "http://localhost:8082/video-call?username=Room";

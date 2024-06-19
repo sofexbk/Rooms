@@ -17,10 +17,7 @@ import {
 } from "@/components/ui/command"
 import { useToast } from "@/components/ui/use-toast";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle
+    Dialog
 } from "@/components/ui/dialog"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { InviteMember } from "./invitemember"
@@ -36,21 +33,10 @@ import { useEffect } from "react"
 import { useRooms } from "@/Providers/RoomsContext"
 import { useParams } from "react-router-dom"
 import { useAuth } from "@/Providers/AuthContext"
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { formatDistanceToNow } from "date-fns"
-import { toast } from "sonner"
-import { Toast } from "@radix-ui/react-toast"
+
+
 import { useTranslation } from "react-i18next"
+import { formatDistanceToNow } from "date-fns"
 
 interface UnlinkUserDto {
     userId: number;
@@ -61,11 +47,11 @@ export function MembersList() {
     const { toast } = useToast()
     const { idRoom } = useParams();
     const [open, setOpen] = React.useState(false)
-    const [selectedUsers, setSelectedUsers] = React.useState<User[]>([])
-    const { usersAndRoles, roomAdmin, getUserRooms, getRoomUsers, addRoom, getRoomAdmin, inviteUser, unlinkUser } = useRooms();
-    const [input, setInput] = React.useState("")
+    //const [selectedUsers, setSelectedUsers] = React.useState<User[]>([])
+    const { usersAndRoles, roomAdmin, getRoomUsers,  getRoomAdmin,  unlinkUser } = useRooms();
+    //const [input, setInput] = React.useState("")
     const { user } = useAuth();
-    const inputLength = input.trim().length
+    //const inputLength = input.trim().length
     const { t } = useTranslation();
     
     useEffect(() => {
