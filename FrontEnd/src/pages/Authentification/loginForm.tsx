@@ -21,16 +21,16 @@ import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Toaster, toast } from "sonner";
-import { z } from "zod";
+//import { z } from "zod";
 
 
 
-const FormSchema = z.object({
+/*const FormSchema = z.object({
   dob: z.date({
     required_error: "A date of birth is required.",
   }),
-})
-let err: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.PromiseLikeOfReactNode | null | undefined = null;
+})*/
+//let err: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined = null;
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
@@ -60,11 +60,8 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         login(userData, accessToken);
       }
       navigate('/profile');
-    } catch (error) {
-      console.error('Error logging in:', error);
-      err = error.response.data;
-      {err && toast.warning(err)}
-    }
+    } catch (error) { toast.warning((error as { response?: { data?: string } }).response?.data ?? 'An error occurred. Please try again.'); }
+
   };
   
   const handleContinueWithGithub = async () => {

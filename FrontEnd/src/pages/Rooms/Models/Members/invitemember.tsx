@@ -53,8 +53,8 @@ export function InviteMember() {
     const { idRoom } = useParams();
     const { users } = useAuth();
     const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
-    const { inviteUser, getRoomUsers } = useRooms();
-    const [input, setInput] = React.useState("")
+    const { inviteUser} = useRooms();
+    //const [input, setInput] = React.useState("")
    // const inputLength = input.trim().length;
 
     const handleSelect = (clickedUser: User) => {

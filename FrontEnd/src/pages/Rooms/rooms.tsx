@@ -1,8 +1,8 @@
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import { Dashboard } from "./Dashboard";
 
 export default function Rooms() {
-  const { idRoom } = useParams();
+ // const { idRoom } = useParams();
   const layoutCookie = document.cookie.match(/react-resizable-panels:layout=([^;]+)/);
   const collapsedCookie = document.cookie.match(/react-resizable-panels:collapsed=([^;]+)/);
   

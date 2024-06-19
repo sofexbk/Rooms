@@ -18,11 +18,11 @@ import { cn } from "@/lib/utils";
 import { useTranslation } from 'react-i18next';
 
 
-const FormSchema = z.object({
+/*const FormSchema = z.object({
   dob: z.date({
     required_error: "A date of birth is required.",
   }),
-})
+})*/
 interface RootState {
   signUp: {
     loading: boolean;
@@ -44,19 +44,19 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function SignupForm({ className, ...props }: UserAuthFormProps) {
   const { t } = useTranslation();
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [isLoading, _] = React.useState<boolean>(false)
 
-  async function onSubmit(event: React.SyntheticEvent) {
+ /* async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true)
 
     setTimeout(() => {
       setIsLoading(false)
     }, 3000)
-  }
+  }*/
 
   const dispatch = useDispatch();
-  const signUpState = useSelector((state: RootState) => state.signUp);
+  //const signUpState = useSelector((state: RootState) => state.signUp);
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -90,7 +90,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await dispatch(signUpRequest(formData));
+      const response = dispatch(signUpRequest(formData));
       console.log('Sign Up Response:', response.data); // Log the resolved data from the response
       if (response && response.data) {
         Cookies.set('user', JSON.stringify(response.data), { expires: 7 }); // Set cookie with expiration date
@@ -135,7 +135,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
       console.error('Error authenticating with Google:', error);
     }
   };
-  const [error, setError] = useState<string>('');
+  //const [_error, _setError] = useState<string>('');
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
