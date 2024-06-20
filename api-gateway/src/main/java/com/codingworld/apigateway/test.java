@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class test {
     @GetMapping("/api/messageClient")
     public String get(){
-        return "Message from company client yeeeh g";
+        return "Message from company client yeeeh gk";
     }
 }
